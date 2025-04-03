@@ -8,7 +8,7 @@ public class SearchPage {
 
     public SearchPage(Page page) {
         this.page = page;
-        this.searchTermInput = page.locator("[aria-label='0 characters out of 2000']");
+        this.searchTermInput = page.locator(SearchLocators.SEARCH_INPUT_BOX);
     }
 
     public void navigate() {
@@ -19,4 +19,6 @@ public class SearchPage {
         searchTermInput.fill(text);
         searchTermInput.press("Enter");
     }
+
+
 }

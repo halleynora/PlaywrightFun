@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.models.search;
 
 import com.microsoft.playwright.*;
 

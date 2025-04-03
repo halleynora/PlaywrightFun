@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.models.search;
 
 public class SearchLocators {
     public static final String SEARCH_INPUT_BOX = "[aria-label='0 characters out of 2000']";

@@ -1,9 +1,8 @@
 package org.example;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.AriaRole;
+import org.example.models.copilot.CoPilotLocators;
 import org.example.models.search.SearchLocators;
 import org.example.models.search.SearchPage;
 import org.junit.jupiter.api.AfterEach;
@@ -48,12 +47,17 @@ public class TestBingSearch {
             SearchPage searchPage = new SearchPage(page);
             searchPage.navigate();
             assertThat(page.locator(SearchLocators.COPILOT_BUTTON)).isVisible();
-            page.locator(SearchLocators.COPILOT_BUTTON).click();
-            assertThat(page).hasTitle("Microsoft Copilot: Your AI companion");
+
+            Page newPage = page.waitForPopup(() -> {
+                page.locator(SearchLocators.COPILOT_BUTTON).click();
+        });
+            assertThat(newPage).hasTitle(java.util.regex.Pattern.compile("Microsoft Copilot: Your AI companion"));
     }
+
 
     @AfterEach
     void teardown() {
+        page.close();
         browser.close();
         playwright.close();
     }

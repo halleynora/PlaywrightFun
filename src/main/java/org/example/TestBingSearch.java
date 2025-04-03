@@ -36,26 +36,20 @@ public class TestBingSearch {
 
     @Test
     void assertCoPilotButton() {
-        //new BrowserType.LaunchOptions().setHeadless(false)
-        try (Playwright playwright = Playwright.create()) {
             page = browser.newPage();
             SearchPage searchPage = new SearchPage(page);
             searchPage.navigate();
             assertThat(page.locator(SearchLocators.COPILOT_BUTTON)).isVisible();
-
-        }
     }
 
     @Test
     void clickCoPilotButton() {
-        try (Playwright playwright = Playwright.create()) {
             page = browser.newPage();
             SearchPage searchPage = new SearchPage(page);
             searchPage.navigate();
             assertThat(page.locator(SearchLocators.COPILOT_BUTTON)).isVisible();
             page.locator(SearchLocators.COPILOT_BUTTON).click();
             assertThat(page).hasTitle("Microsoft Copilot: Your AI companion");
-        }
     }
 
     @AfterEach
